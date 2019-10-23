@@ -1,6 +1,7 @@
 
-#include "port.h"
+#include "VGA/port.h"
 #include "screen.h"
+#include "../kernel/util.h"
 
 int get_cursor_offset();
 void set_cursor_offset(int offset);
@@ -51,8 +52,25 @@ int print_char (char c, int col, int row, char attr)
         offset += 2;
     }
 
-    set_cursor_offset(offset);
+    /*
+     * Scroll if goes past screen length
+     */
+    if (offset > MAX_ROWS*MAX_COLS*2)
+    {
+        int i;
+        for (i = 1; i < MAX_ROWS; i++)
+            _memcpy(get_offset(0, i)   + VIDEO_ADDRESS,
+                    get_offset(0, i-1) + VIDEO_ADDRESS,
+                    MAX_COLS*2);
 
+        char* last_line = get_offset(0, MAX_ROWS-1) + VIDEO_ADDRESS;
+        for (i = 0; i < MAX_COLS; i++)
+            last_line[0] = 0;
+
+        offset -= 2*MAX_COLS;
+    }
+
+    set_cursor_offset(offset);
     return offset;
 }
 
