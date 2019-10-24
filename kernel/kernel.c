@@ -4,8 +4,7 @@
 #include "util.h"
 
 void main() {
-//     char* video_memory = (char*) 0xb8000;
-//     *video_memory = 'G';
+    /*
     char* welcome[15][10] = {
         " ", " ", "-", " ",  " ",  " ", " ",  " ",  " ", " ",
         " ", "/", " ", "\\", " ",  " ", " ",  " ",  " ", " ",
@@ -37,6 +36,7 @@ void main() {
         _itoa(i, str);
         kprint_at(str, 0, i);
     }
+    */
 
     kprint("Welcome to Aos");
 }
