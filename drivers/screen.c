@@ -17,8 +17,8 @@ void kprint_at(char* msg, int c, int r)
         offset = get_offset(c, r);
     else {
         offset = get_cursor_offset();
-        r = get_offset_row(r);
-        c = get_offset_col(c);
+        r = get_offset_row(offset);
+        c = get_offset_col(offset);
     }
 
     int i = 0;
@@ -39,6 +39,13 @@ int print_char (char c, int col, int row, char attr)
     unsigned char* vidmem = (unsigned char*) VIDEO_ADDRESS;
     if (!attr) attr = WHITE_ON_BLACK;
 
+    if ( col >= MAX_COLS || row >= MAX_ROWS )
+    {
+        vidmem[2*MAX_ROWS*MAX_COLS - 2] = 'E';
+        vidmem[2*MAX_ROWS*MAX_COLS - 1] = WHITE_ON_BLACK;
+        return get_offset(col, row);
+    }
+
     int offset;
     if ( col >= 0 && row >= 0 ) offset = get_offset(col, row);
     else                        offset = get_cursor_offset();
@@ -55,7 +62,7 @@ int print_char (char c, int col, int row, char attr)
     /*
      * Scroll if goes past screen length
      */
-    if (offset > MAX_ROWS*MAX_COLS*2)
+    if (offset >= MAX_ROWS*MAX_COLS*2)
     {
         int i;
         for (i = 1; i < MAX_ROWS; i++)
@@ -64,8 +71,8 @@ int print_char (char c, int col, int row, char attr)
                     MAX_COLS*2);
 
         char* last_line = get_offset(0, MAX_ROWS-1) + VIDEO_ADDRESS;
-        for (i = 0; i < MAX_COLS; i++)
-            last_line[0] = 0;
+        for (i = 0; i < MAX_COLS*2; i++)
+            last_line[i] = 0;
 
         offset -= 2*MAX_COLS;
     }
