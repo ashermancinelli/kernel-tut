@@ -77,7 +77,7 @@ typedef struct {
     uint32_t ds;                                      
 
     // regs pushed by pusha
-    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+    uint32_t edi, esi, ebp, useless, ebx, edx, ecx, eax;
 
     // interrupt no & code
     uint32_t int_no, err_code;
@@ -89,7 +89,7 @@ typedef struct {
 void isr_install();
 void isr_handler(registers_t *r);
 
-typedef void (*isr_t)(registers_t);
+typedef void (*isr_t)(registers_t*);
 void register_interrupt_handler(uint8_t n, isr_t handler);
 
 #endif
