@@ -1,6 +1,6 @@
 
-#include "VGA/port.h"
 #include "screen.h"
+#include "../cpu/port.h"
 #include "../kernel/util.h"
 
 int get_cursor_offset();

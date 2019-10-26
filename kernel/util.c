@@ -1,8 +1,18 @@
+#include "util.h"
+
 void _memcpy(char* src, char* dst, int nbytes)
 {
     int i;
     for (i = 0; i < nbytes; i++)
         *(dst + i) = *(src + i);
+}
+
+int _strlen(char* str)
+{
+    int len = 0;
+    while (str[len])
+        len++;
+    return len;
 }
 
 void _itoa(int n, char str[])
