@@ -1,5 +1,5 @@
 #include "idt.h"
-#include "../kernel/util.c"
+#include "../kernel/util.h"
 
 #include <stdint.h>
 

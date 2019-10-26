@@ -6,6 +6,15 @@
 #include <stdint.h>
 
 /*
+ *
+ * Interrupt Service Routines
+ *
+ * handlers defined in `interrupt.asm`, so make sure to
+ * link that object file manually.
+ *
+ */
+
+/*
  * Cant do in a loop because we
  * have to preserve function addresses
  */
@@ -93,7 +102,7 @@ void isr_handler(registers_t *regs)
 
     kprint("Got interrupt\n");
     kprint(s);
-    kprint("\nException message");
+    kprint("\nException message\n");
     kprint(exception_messages[regs->int_no]);
     kprint("\n");
 }
