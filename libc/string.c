@@ -1,17 +1,9 @@
-#include "util.h"
+#include "string.h"
 
-void _memcpy(char* src, char* dst, int nbytes)
-{
-    int i;
-    for (i = 0; i < nbytes; i++)
-        *(dst + i) = *(src + i);
-}
-
-int _strlen(char* str)
+int _strlen(char str[])
 {
     int len = 0;
-    while (str[len])
-        len++;
+    while (str[len]) ++len;
     return len;
 }
 
@@ -28,12 +20,6 @@ void _itoa(int n, char str[])
     reverse(str);
 }
 
-void _memset(uint8_t *dst, uint8_t val, uint32_t len)
-{
-    uint8_t *temp = (uint8_t *)dst;
-    for ( ; len != 0; len--) *temp++ = val;
-}
-
 void reverse(char s[])
 {
     int c, j, i;
@@ -43,4 +29,27 @@ void reverse(char s[])
         s[i] = s[j];
         s[j] = c;
     }
+}
+
+int _strcmp(char* a, char* b)
+{
+    int i;
+    for (i=0; a[i] == b[i]; i++)
+    {
+        if (a[i] == '\0') return 0;
+    }
+    return a[i] - b[i];
+}
+
+void append(char s[], int n)
+{
+    int l = _strlen(s);
+    s[l] = n;
+    s[l+1] = '\0';
+}
+
+void backspace(char s[])
+{
+    int l = _strlen(s);
+    s[l-1] = '\0';
 }

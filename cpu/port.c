@@ -1,5 +1,7 @@
 #include "port.h"
 
+#include <stdint.h>
+
 unsigned char port_byte_in (uint16_t port)
 {
 	unsigned char res;

@@ -1,5 +1,5 @@
 #include "idt.h"
-#include "../kernel/util.h"
+#include "../libc/mem.h"
 
 #include <stdint.h>
 

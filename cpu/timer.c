@@ -2,17 +2,16 @@
 #include "isr.h"
 #include "port.h"
 
+#include "../libc/stdutil.h"
+
+#include <stdint.h>
+
 uint32_t tick = 0;
 
 static void timer_callback(registers_t *regs)
 {
     tick++;
-    kprint("Tick: ");
-
-    char s_tick[256];
-    _itoa(tick, s_tick);
-    kprint(s_tick);
-    kprint("\n");
+    UNUSED(regs);
 }
 
 void init_timer(uint32_t freq)

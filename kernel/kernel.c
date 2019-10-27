@@ -1,12 +1,13 @@
-
 #include "../cpu/isr.h"
 #include "../cpu/timer.h"
 #include "../drivers/keyboard.h"
+#include "../drivers/screen.h"
 
-void main()
+void kernel_main()
 {
     isr_install();
-    asm volatile("sti");
-    init_timer(50);
-    init_keyboard();
+    irq_install();
+    clear_screen();
+    kprint("Welcome to DOCos.\n> ");
 }
+
