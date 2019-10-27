@@ -25,5 +25,22 @@ void _itoa(int n, char str[])
 
     if (sign<0) str[i++] = '-';
     str[i] = '\0';
+    reverse(str);
+}
 
+void _memset(uint8_t *dst, uint8_t val, uint32_t len)
+{
+    uint8_t *temp = (uint8_t *)dst;
+    for ( ; len != 0; len--) *temp++ = val;
+}
+
+void reverse(char s[])
+{
+    int c, j, i;
+    for (i = 0, j = _strlen(s)-1; i < j; i++, j--)
+    {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
 }

@@ -189,7 +189,7 @@ void irq_install()
     asm volatile("sti");
 
     // IRQ0 timer
-    // init_timer(50);
+    init_timer(50);
 
-    // init_keyboard();
+    init_keyboard();
 }

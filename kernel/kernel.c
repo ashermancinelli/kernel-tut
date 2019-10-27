@@ -1,12 +1,12 @@
 
-#include "../drivers/screen.h"
 #include "../cpu/isr.h"
-#include "util.h"
+#include "../cpu/timer.h"
+#include "../drivers/keyboard.h"
 
 void main()
 {
     isr_install();
-    clear_screen();
-    kprint("Welcome to Aos\n");
-    asm volatile("int $0");
+    asm volatile("sti");
+    init_timer(50);
+    init_keyboard();
 }

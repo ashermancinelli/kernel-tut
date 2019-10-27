@@ -15,13 +15,13 @@ isr_common_stub:
 	mov gs, ax
     push esp
 
-  cld
+    cld
     ; 2. Call C handler
 	call isr_handler
 	
     ; 3. Restore state
 	pop eax 
-  pop eax 
+	pop eax 
 	mov ds, ax
 	mov es, ax
 	mov fs, ax
@@ -47,15 +47,17 @@ irq_common_stub:
     mov es, ax
     mov fs, ax
     mov gs, ax
+    push esp
+    cld
     call irq_handler ; Different than the ISR code
     pop ebx  ; Different than the ISR code
+    pop ebx
     mov ds, bx
     mov es, bx
     mov fs, bx
     mov gs, bx
     popa
     add esp, 8
-    sti
     iret
 
 ; First make the ISRs global

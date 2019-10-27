@@ -24,7 +24,7 @@ kernel.elf: boot/kernel_entry.o ${OBJ}
 	i386-elf-ld -o $@ -Ttext 0x1000 $^ 
 
 run: os-image.bin
-	sleep 10 && killall make &
+	sleep 5 && killall make &
 	qemu-system-i386 -curses -fda os-image.bin
 
 # Open the connection to qemu and load our kernel-object file with symbols
